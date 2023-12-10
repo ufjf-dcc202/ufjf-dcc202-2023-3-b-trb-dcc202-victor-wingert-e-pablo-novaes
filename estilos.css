@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@500&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% da altura da janela */
+    margin: 0;
+    font-family: 'Eczar', serif;
+}
