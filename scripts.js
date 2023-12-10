@@ -208,3 +208,12 @@ function defineGanhador(){
     }
 } // DEFINE O GANHADOR DO JOGO
 
+function placar() {
+    const pontuacaoJogador = somaPontucao('#pontuacaoJogador');
+    const pontuacaoNPC = somaPontucao('#pontuacaoNPC');
+    const placarJogador = document.querySelector('#placarJogador');
+    const placarNPC = document.querySelector('#placarNPC');
+    placarJogador.textContent = `JOGADOR: ${pontuacaoJogador}`;
+    placarNPC.textContent = `NPC: ${pontuacaoNPC}`;
+} // ATUALIZA O PLACAR EM TEMPO REAL
+
