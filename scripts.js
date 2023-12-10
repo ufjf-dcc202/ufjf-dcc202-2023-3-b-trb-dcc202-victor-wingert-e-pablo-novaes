@@ -168,3 +168,14 @@ function verificaFimDoJogo() {
     return false;
 } // VAI VERIFICAR O FIM DO JOGO
 
+function posicoesDisponiveisJogo(grid){
+    let posicoesDisponiveis = [];
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if(grid[i][j].length === 0){
+                posicoesDisponiveis.push([i, j]);
+            }
+        }
+    }
+    return posicoesDisponiveis;
+} // VE AS POSICOES DISPONIVEIS PARA O NPC JOGAR
