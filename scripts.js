@@ -240,3 +240,8 @@ function somaPontucao(tipo){
     }
     return soma;
 } // SOMA A PONTUACAO DA GRID DE PONTUACAO
+
+
+function randomNumber() {
+    return Math.floor(Math.random() * 6) + 1;
+} // GERA UM NÚMERO ALEATÓRIO
