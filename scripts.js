@@ -191,3 +191,20 @@ function posicoesDisponiveisJogador(coluna) {
     return posicoesDisponiveis;
 } // VE AS POSICOES DISPONIVEIS NA COLUNA QUE O JOGADOR CLICAR O BOTAO
 
+function defineGanhador(){
+    const pontuacaoJogador = somaPontucao('#pontuacaoJogador');
+    const pontuacaoNPC = somaPontucao('#pontuacaoNPC');
+    const ganhador = document.querySelector('#ganhador');
+    const placarJogador = document.querySelector('#placarJogador');
+    const placarNPC = document.querySelector('#placarNPC');
+
+    placarJogador.textContent = `JOGADOR: ${pontuacaoJogador}`;
+    placarNPC.textContent = `NPC: ${pontuacaoNPC}`;
+    
+    if(pontuacaoJogador > pontuacaoNPC){
+        ganhador.textContent = 'Ganhador: Jogador';
+    } else {
+        ganhador.textContent = 'Ganhador: NPC';
+    }
+} // DEFINE O GANHADOR DO JOGO
+
