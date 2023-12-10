@@ -8,3 +8,12 @@ body {
     margin: 0;
     font-family: 'Eczar', serif;
 }
+
+.container {
+    height: 900px;
+    width: 1500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: row;
+}
