@@ -14,6 +14,20 @@ let pontuacaoJogador = [0, 0, 0];
 
 let pontuacaoNPC = [0, 0, 0];
 
+atualizaTela();
+
+const dado = document.querySelector('#dado');
+
+let dadoAtual = randomNumber();
+
+dado.textContent = dadoAtual;
+
+colocarImagem();
+
+adcDadoJogador(0);
+adcDadoJogador(1);
+adcDadoJogador(2);
+
 //FUNCOES DAQUI PARA BAIXO
 
 function preencherGrid(vetor, gridSelector) {
@@ -44,7 +58,7 @@ function preencherGridComImagens(vetor, gridSelector) {
             celula[index].innerHTML = '';
             if (vetor[i][j] >= 1 && vetor[i][j] <= 6) {
                 const imgLocal = document.createElement('img');
-                imgLocal.src = `./dado${vetor[i][j]}.svg`;
+                imgLocal.src = `./assets/dado${vetor[i][j]}.svg`;
                 celula[index].appendChild(imgLocal);
             } 
             index++;
@@ -80,12 +94,3 @@ function contadorColuna(coluna, valor, qualGrid){
     // a contagem é feita individualmente para cada valor passado no argumento
 } // CONTA OS DADOS REPETIDOS NA COLUNAA
 
-function atualizaTela() {
-    preencherGrid(gridJogador, '#jogador');
-    preencherGrid(gridNPC, '#npc');
-    preencherGridPontuacao(pontuacaoJogador, '#pontuacaoJogador');
-    preencherGridPontuacao(pontuacaoNPC, '#pontuacaoNPC');
-    atualizaTelaComImagens();
-    attPontuacao(gridJogador, '#pontuacaoJogador');
-    attPontuacao(gridNPC, '#pontuacaoNPC');
-}
