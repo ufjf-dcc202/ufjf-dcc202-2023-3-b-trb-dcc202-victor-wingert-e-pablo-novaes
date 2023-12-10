@@ -179,3 +179,15 @@ function posicoesDisponiveisJogo(grid){
     }
     return posicoesDisponiveis;
 } // VE AS POSICOES DISPONIVEIS PARA O NPC JOGAR
+
+
+function posicoesDisponiveisJogador(coluna) {
+    let posicoesDisponiveis = [];
+    for(let i = 0; i < 3; i++){
+        if(gridJogador[i][coluna].length === 0){
+            posicoesDisponiveis.push(i);
+        }
+    }
+    return posicoesDisponiveis;
+} // VE AS POSICOES DISPONIVEIS NA COLUNA QUE O JOGADOR CLICAR O BOTAO
+
