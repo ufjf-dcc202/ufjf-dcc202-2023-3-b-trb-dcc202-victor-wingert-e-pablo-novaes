@@ -14,6 +14,20 @@ let pontuacaoJogador = [0, 0, 0];
 
 let pontuacaoNPC = [0, 0, 0];
 
+atualizaTela();
+
+const dado = document.querySelector('#dado');
+
+let dadoAtual = randomNumber();
+
+dado.textContent = dadoAtual;
+
+colocarImagem();
+
+adcDadoJogador(0);
+adcDadoJogador(1);
+adcDadoJogador(2);
+
 //FUNCOES DAQUI PARA BAIXO
 
 function preencherGrid(vetor, gridSelector) {
@@ -240,7 +254,6 @@ function somaPontucao(tipo){
     }
     return soma;
 } // SOMA A PONTUACAO DA GRID DE PONTUACAO
-
 
 function randomNumber() {
     return Math.floor(Math.random() * 6) + 1;
