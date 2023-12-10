@@ -14,20 +14,6 @@ let pontuacaoJogador = [0, 0, 0];
 
 let pontuacaoNPC = [0, 0, 0];
 
-atualizaTela();
-
-const dado = document.querySelector('#dado');
-
-let dadoAtual = randomNumber();
-
-dado.textContent = dadoAtual;
-
-colocarImagem();
-
-adcDadoJogador(0);
-adcDadoJogador(1);
-adcDadoJogador(2);
-
 //FUNCOES DAQUI PARA BAIXO
 
 function preencherGrid(vetor, gridSelector) {
@@ -93,4 +79,14 @@ function contadorColuna(coluna, valor, qualGrid){
     return vezes;
     // a contagem é feita individualmente para cada valor passado no argumento
 } // CONTA OS DADOS REPETIDOS NA COLUNAA
+
+function atualizaTela() {
+    preencherGrid(gridJogador, '#jogador');
+    preencherGrid(gridNPC, '#npc');
+    preencherGridPontuacao(pontuacaoJogador, '#pontuacaoJogador');
+    preencherGridPontuacao(pontuacaoNPC, '#pontuacaoNPC');
+    atualizaTelaComImagens();
+    attPontuacao(gridJogador, '#pontuacaoJogador');
+    attPontuacao(gridNPC, '#pontuacaoNPC');
+} // ATUALIZA A TELA DO JOGO
 
