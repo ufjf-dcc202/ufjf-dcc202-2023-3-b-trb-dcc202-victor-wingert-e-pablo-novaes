@@ -157,3 +157,14 @@ function adcDadoNpc() {
     descartarDados(novoNumero, coluna, gridJogador);
 } // ADICIONA O DADO DO NPC DE FORMA ALEATÓRIA
 
+function verificaFimDoJogo() {
+    const posicoesDisponiveisJ = posicoesDisponiveisJogo(gridJogador);
+    const posicoesDisponiveisNPC = posicoesDisponiveisJogo(gridNPC);
+    if (posicoesDisponiveisJ.length === 0 || posicoesDisponiveisNPC. length === 0) {
+        dado.textContent = '';
+        defineGanhador();
+        return true;
+    }
+    return false;
+} // VAI VERIFICAR O FIM DO JOGO
+
