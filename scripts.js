@@ -217,3 +217,10 @@ function placar() {
     placarNPC.textContent = `NPC: ${pontuacaoNPC}`;
 } // ATUALIZA O PLACAR EM TEMPO REAL
 
+function descartarDados(valor, coluna, tipoGrid) {
+    for (let i = 0; i < 3; i++) {
+        if (tipoGrid[i][coluna] === valor) {
+            tipoGrid[i][coluna] = [];
+        }
+    }
+} // SERVE PARA ELIMINAR O DADO JOGADO CASO ELE JA EXISTA NA MESMO COLUNA
