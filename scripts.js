@@ -90,3 +90,70 @@ function atualizaTela() {
     attPontuacao(gridNPC, '#pontuacaoNPC');
 } // ATUALIZA A TELA DO JOGO
 
+function adcDadoJogador(botao) {
+    const botoes = document.querySelectorAll('.botao');
+    let permitirClique = true;
+
+    botoes[botao].addEventListener('click', () => {
+        if (!permitirClique) {
+            return;
+        }
+        permitirClique = false;
+        atualizaTela();
+        if (verificaFimDoJogo()) {
+            return;
+        }
+        
+        const colunaAtual = botao;
+        let valorAtual = dadoAtual;
+
+        const posicoesDisponiveis = posicoesDisponiveisJogador(colunaAtual);
+
+        if(posicoesDisponiveis.length === 0){
+            return;
+        }
+
+        const linha = posicoesDisponiveis[0]; // 0 porque é a primeira posição disponível
+        gridJogador[linha][colunaAtual] = valorAtual;
+
+        descartarDados(valorAtual, colunaAtual, gridNPC);
+        atualizaTela();
+        placar();
+        
+        if (verificaFimDoJogo()) {
+            return;
+        }
+
+        dadoAtual = randomNumber();
+        dado.textContent = dadoAtual;
+
+        colocarImagem();
+
+        setTimeout(() => {
+            adcDadoNpc();
+            atualizaTela();
+            placar();
+            permitirClique = true;
+        }, 750);
+    });
+} // O JOGO VAI RODAR DENTRO DESSA FUNCAO, QUE PREENCHE A GRID COM O VALOR DO DADO GERADO
+
+function adcDadoNpc() {
+    const posicoesDisponiveis = posicoesDisponiveisJogo(gridNPC);
+
+    if (posicoesDisponiveis.length === 0) {
+        return;
+    }
+
+    const numPosicaoAleatoria = Math.floor(Math.random() * posicoesDisponiveis.length);
+    const posicaoAleatoria = posicoesDisponiveis[numPosicaoAleatoria];
+    const linha = posicaoAleatoria[0];
+    const coluna = posicaoAleatoria[1];
+
+    const novoNumero = randomNumber();
+
+    gridNPC[linha][coluna] = novoNumero;
+
+    descartarDados(novoNumero, coluna, gridJogador);
+} // ADICIONA O DADO DO NPC DE FORMA ALEATÓRIA
+
