@@ -51,3 +51,67 @@ body {
     align-items: center;
     display: flex;
 }
+
+.botao:hover {  
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.celulaPontuacao {
+    background-color: palegreen;
+    height: 35px;
+    width: 70px;
+    font-size: 13pt;
+    margin: 4px 2px;
+    padding-top: 4px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 1px solid black;
+}
+
+.celula {
+    height: 70px;
+    width: 70px;
+    margin: 2px 2px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#dado{
+    height: 70px;
+    width: 70px;
+    margin: 2px 2px;
+    padding-top: 10px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#organizarMeio {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 600px;
+}
+
+.resultado {
+    width: 230px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.placar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    width: 200px;
+    height: 200px;
+}
