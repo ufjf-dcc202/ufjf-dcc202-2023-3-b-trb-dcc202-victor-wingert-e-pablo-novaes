@@ -25,3 +25,11 @@ body {
     justify-content: space-around;
     flex-flow: column;
 }
+
+.grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    width: 230px;
+}
+
