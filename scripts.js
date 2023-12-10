@@ -224,3 +224,10 @@ function descartarDados(valor, coluna, tipoGrid) {
         }
     }
 } // SERVE PARA ELIMINAR O DADO JOGADO CASO ELE JA EXISTA NA MESMO COLUNA
+
+function colocarImagem(){
+    dado.innerHTML = '';
+    const imgLocal = document.createElement('img');
+    imgLocal.src = `./assets/dado${dadoAtual}.svg`;
+    dado.appendChild(imgLocal);
+} // COLOCA IMAGEM NO LUGAR DO NÚMERO DO DADO
