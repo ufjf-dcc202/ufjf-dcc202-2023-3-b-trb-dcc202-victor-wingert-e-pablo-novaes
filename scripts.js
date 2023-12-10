@@ -231,3 +231,12 @@ function colocarImagem(){
     imgLocal.src = `./assets/dado${dadoAtual}.svg`;
     dado.appendChild(imgLocal);
 } // COLOCA IMAGEM NO LUGAR DO NÚMERO DO DADO
+
+function somaPontucao(tipo){
+    const celula = document.querySelectorAll(`${tipo} .celulaPontuacao`);
+    let soma = 0;
+    for (let i = 0; i < 3; i++) {
+        soma += parseInt(celula[i].textContent);
+    }
+    return soma;
+} // SOMA A PONTUACAO DA GRID DE PONTUACAO
