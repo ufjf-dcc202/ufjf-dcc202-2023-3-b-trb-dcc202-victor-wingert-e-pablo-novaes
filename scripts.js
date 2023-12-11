@@ -1,30 +1,30 @@
-let gridJogador = [
+let gridJogador = [    //adiciona a tabela do jogador 1, que é seu player        
     [[], [], []],
     [[], [], []],
     [[], [], []]
 ];
 
-let gridNPC = [
+let gridNPC = [           //adiciona tabela do NPC  que vai ser o bot
     [[], [], []],
     [[], [], []],
     [[], [], []]
 ];
 
-let pontuacaoJogador = [0, 0, 0];
+let pontuacaoJogador = [0, 0, 0]; // estado inicial do jogador 
 
-let pontuacaoNPC = [0, 0, 0];
+let pontuacaoNPC = [0, 0, 0]; // estado inicial do bot
 
-atualizaTela();
+atualizaTela(); // atualiza inicialmete o jogo
 
 const dado = document.querySelector('#dado');
 
-let dadoAtual = randomNumber();
+let dadoAtual = randomNumber(); // gera o primeiro numero aleatorio
 
 dado.textContent = dadoAtual;
 
-colocarImagem();
+colocarImagem(); 
 
-adcDadoJogador(0);
+adcDadoJogador(0);    //adiciona dados dos jogadores nas colunas 
 adcDadoJogador(1);
 adcDadoJogador(2);
 
@@ -39,7 +39,7 @@ function preencherGrid(vetor, gridSelector) {
             index++;
         }
     }
-} // PREENCHE A GRID COM OS VALORES
+} // PREENCHE A GRID COM OS VALORES relacionados aos valores dos dados na forma de Matriz com [i][j];
 
 function preencherGridPontuacao(vetor, gridSelector) {
     let index = 0;
@@ -48,7 +48,7 @@ function preencherGridPontuacao(vetor, gridSelector) {
         celula[index].textContent = vetor[i];
         index++;
     }
-} // PREENCHE A GRID DA PONTUAÇÃO
+} // PREENCHE A GRID DA PONTUAÇÃO baseado no gridPontuacao(vetor), os vetores sao preenchidos com valores gerados pelos dados
 
 function preencherGridComImagens(vetor, gridSelector) {
     let index = 0;
@@ -64,12 +64,12 @@ function preencherGridComImagens(vetor, gridSelector) {
             index++;
         }
     }
-} //PREENCHE A GRID COM IMAGENS
+} //PREENCHE A GRID COM IMAGENS de 1 a 6, as 'peças' do tabuleiro ficam estilizadas
 
 function atualizaTelaComImagens() {
     preencherGridComImagens(gridJogador, '#jogador');
     preencherGridComImagens(gridNPC, '#npc');
-} // CHAMA AS FUNÇÇÕES DE PREENCHER GRID
+} // CHAMA AS FUNÇÕES DE PREENCHER GRID: estilizando o tabuleiro com dados  e colocando os elementos nas celulas, e atualiza tela para a proxima jogada.
 
 function attPontuacao(tipoGrid, tipoIdGrid) {
     const celulas = document.querySelectorAll(`${tipoIdGrid} .celulaPontuacao`);
@@ -77,11 +77,11 @@ function attPontuacao(tipoGrid, tipoIdGrid) {
     for (let i = 0; i < 3; i++){
         let soma = 0;
         for (let j = 0; j < 3; j++){
-            soma += tipoGrid[j][i] * contadorColuna(i, tipoGrid[j][i], tipoGrid);
+            soma += tipoGrid[j][i] * contadorColuna(i, tipoGrid[j][i], tipoGrid);// atualiza o valor e multpilca pelo "contador coluna" que retorna 'vezes'.
         }
         celulas[i].textContent = soma;
     }
-}; // ATUALIZA A PONTUACAO DE GRID PONTUACAO
+}; // ATUALIZA A PONTUACAO DE GRID PONTUACAO aparecendo acima da coluna, na celula 'pontuacao'
 
 function contadorColuna(coluna, valor, qualGrid){
     let vezes = 0;
@@ -91,7 +91,7 @@ function contadorColuna(coluna, valor, qualGrid){
         }
     }
     return vezes;
-    // a contagem é feita individualmente para cada valor passado no argumento
+    // a contagem é feita individualmente para cada valor passado no argumento ,somando assim a pontuacao final na funcao  "att pontuacao"
 } // CONTA OS DADOS REPETIDOS NA COLUNAA
 
 function atualizaTela() {
@@ -102,7 +102,7 @@ function atualizaTela() {
     atualizaTelaComImagens();
     attPontuacao(gridJogador, '#pontuacaoJogador');
     attPontuacao(gridNPC, '#pontuacaoNPC');
-} // ATUALIZA A TELA DO JOGO
+} // ATUALIZA A TELA DO JOGO chamando  algumas funcoes atualizando o estado do jogo apos as jogadas dos players
 
 function adcDadoJogador(botao) {
     const botoes = document.querySelectorAll('.botao');
