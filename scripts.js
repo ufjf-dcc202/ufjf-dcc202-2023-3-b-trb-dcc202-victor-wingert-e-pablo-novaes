@@ -39,7 +39,7 @@ function preencherGrid(vetor, gridSelector) {
             index++;
         }
     }
-} // PREENCHE A GRID COM OS VALORES relacionados aos valores dos dados na forma de Matriz com [i][j];
+} // PREENCHE A GRID COM OS VALORES relacionados aos valores dos dados na forma de Matriz com [i][j], ou seja as celulas do tabuleiro
 
 function preencherGridPontuacao(vetor, gridSelector) {
     let index = 0;
@@ -48,7 +48,7 @@ function preencherGridPontuacao(vetor, gridSelector) {
         celula[index].textContent = vetor[i];
         index++;
     }
-} // PREENCHE A GRID DA PONTUAÇÃO baseado no gridPontuacao(vetor), os vetores sao preenchidos com valores gerados pelos dados
+} // PREENCHE A GRID DA PONTUAÇÃO baseado no gridPontuacao(vetor), o vetor é preenchido com valores gerados pelos soma dos dados em tempo real
 
 function preencherGridComImagens(vetor, gridSelector) {
     let index = 0;
@@ -69,7 +69,7 @@ function preencherGridComImagens(vetor, gridSelector) {
 function atualizaTelaComImagens() {
     preencherGridComImagens(gridJogador, '#jogador');
     preencherGridComImagens(gridNPC, '#npc');
-} // CHAMA AS FUNÇÕES DE PREENCHER GRID: estilizando o tabuleiro com dados  e colocando os elementos nas celulas, e atualiza tela para a proxima jogada.
+} // CHAMA AS FUNÇÕES DE PREENCHER GRID  estilizando o tabuleiro com dados  e colocando os elementos com a imagem de dados nas celulas, e atualiza tela para a proxima jogada.
 
 function attPontuacao(tipoGrid, tipoIdGrid) {
     const celulas = document.querySelectorAll(`${tipoIdGrid} .celulaPontuacao`);
@@ -77,11 +77,11 @@ function attPontuacao(tipoGrid, tipoIdGrid) {
     for (let i = 0; i < 3; i++){
         let soma = 0;
         for (let j = 0; j < 3; j++){
-            soma += tipoGrid[j][i] * contadorColuna(i, tipoGrid[j][i], tipoGrid);// atualiza o valor e multpilca pelo "contador coluna" que retorna 'vezes'.
+            soma += tipoGrid[j][i] * contadorColuna(i, tipoGrid[j][i], tipoGrid);// atualiza o valor e multpilca pelo "contador coluna" que retorna contadorColuna.
         }
         celulas[i].textContent = soma;
     }
-}; // ATUALIZA A PONTUACAO DE GRID PONTUACAO aparecendo acima da coluna, na celula 'pontuacao'
+}; // ATUALIZA A PONTUACAO DE GRID PONTUACAO aparecendo acima da coluna, na 'celulaPontuacao'
 
 function contadorColuna(coluna, valor, qualGrid){
     let vezes = 0;
@@ -91,8 +91,8 @@ function contadorColuna(coluna, valor, qualGrid){
         }
     }
     return vezes;
-    // a contagem é feita individualmente para cada valor passado no argumento ,somando assim a pontuacao final na funcao  "att pontuacao"
-} // CONTA OS DADOS REPETIDOS NA COLUNAA
+    // a contagem é feita individualmente para cada valor passado no argumento,somando assim a pontuacao final na coluna na funcao "att pontuacao".CONTA OS DADOS REPETIDOS NA COLUNA
+} 
 
 function atualizaTela() {
     preencherGrid(gridJogador, '#jogador');
@@ -102,53 +102,53 @@ function atualizaTela() {
     atualizaTelaComImagens();
     attPontuacao(gridJogador, '#pontuacaoJogador');
     attPontuacao(gridNPC, '#pontuacaoNPC');
-} // ATUALIZA A TELA DO JOGO chamando  algumas funcoes atualizando o estado do jogo apos as jogadas dos players
+} // ATUALIZA A TELA DO JOGO chamando  algumas funcoes atualizando o estado do jogo apos as jogadas dos player/bot
 
 function adcDadoJogador(botao) {
-    const botoes = document.querySelectorAll('.botao');
-    let permitirClique = true;
+    const botoes = document.querySelectorAll('.botao'); 
+    let permitirClique = true; // permite o click ate a condicao se tornar false, quando nao tem mais posicoes disponiveis para jogo
 
-    botoes[botao].addEventListener('click', () => {
+    botoes[botao].addEventListener('click', () => { // adiciona um ouvinte para quando dispara o click no botao
         if (!permitirClique) {
             return;
         }
         permitirClique = false;
         atualizaTela();
-        if (verificaFimDoJogo()) {
+        if (verificaFimDoJogo()) {// verifica o fim de jogo
             return;
         }
         
-        const colunaAtual = botao;
-        let valorAtual = dadoAtual;
+        const colunaAtual = botao;    // assume a coluna que está o botao que a player clicou e adc na variavel
+        let valorAtual = dadoAtual;   // assume o valor aleatorio  do dado que foi gerado para a variavel
 
-        const posicoesDisponiveis = posicoesDisponiveisJogador(colunaAtual);
+        const posicoesDisponiveis = posicoesDisponiveisJogador(colunaAtual); // verifica os espacos disponiveis para jogo na funcao posicoesDisponiveisJogador
 
-        if(posicoesDisponiveis.length === 0){
+        if(posicoesDisponiveis.length === 0){// verifica se tem posicoes disponiveis contidas na variavel posicoesDisponiveis, verificando pelo tamanho do vetor ser diferente de zero
             return;
         }
 
         const linha = posicoesDisponiveis[0]; // 0 porque é a primeira posição disponível
         gridJogador[linha][colunaAtual] = valorAtual;
 
-        descartarDados(valorAtual, colunaAtual, gridNPC);
-        atualizaTela();
-        placar();
+        descartarDados(valorAtual, colunaAtual, gridNPC);// descarta os dados jogados
+        atualizaTela();// recebe um novo valor de dado , e atualiaza todos os elementos na tela como : pontuacao , novo numero, preenche as celulas , entre outros definidos na funcao
+        placar(); // atualiza o placar dos players
         
-        if (verificaFimDoJogo()) {
+        if (verificaFimDoJogo()) {// verifica o fim de jogo 
             return;
         }
 
-        dadoAtual = randomNumber();
-        dado.textContent = dadoAtual;
+        dadoAtual = randomNumber();  // gera um novo valor de dado e adiciona na tela o valor a ser jogado em alguma coluna 
+        dado.textContent = dadoAtual; 
 
-        colocarImagem();
+        colocarImagem(); // coloca imagem nesse novo valor gerado
 
         setTimeout(() => {
             adcDadoNpc();
-            atualizaTela();
+            atualizaTela();         // o bot espera em torno de 1 s para fazer a jogada 
             placar();
             permitirClique = true;
-        }, 750);
+        }, 1000);
     });
 } // O JOGO VAI RODAR DENTRO DESSA FUNCAO, QUE PREENCHE A GRID COM O VALOR DO DADO GERADO
 
@@ -169,7 +169,7 @@ function adcDadoNpc() {
     gridNPC[linha][coluna] = novoNumero;
 
     descartarDados(novoNumero, coluna, gridJogador);
-} // ADICIONA O DADO DO NPC DE FORMA ALEATÓRIA
+} // ADICIONA O DADO DO NPC DE FORMA ALEATÓRIA verificando as posicoes disponiveis para o jogo do bot, sendo que no valor(length) zero nao pode mais jogar
 
 function verificaFimDoJogo() {
     const posicoesDisponiveisJ = posicoesDisponiveisJogo(gridJogador);
@@ -180,7 +180,7 @@ function verificaFimDoJogo() {
         return true;
     }
     return false;
-} // VAI VERIFICAR O FIM DO JOGO
+} // VAI VERIFICAR O FIM DO JOGO , verificando se o vetor de posicoes disponiveis para jogar tanto para o jogador tanto para o bot nao tem mais espaço para jogar (length), ou seja tamanho zero
 
 function posicoesDisponiveisJogo(grid){
     let posicoesDisponiveis = [];
@@ -192,7 +192,7 @@ function posicoesDisponiveisJogo(grid){
         }
     }
     return posicoesDisponiveis;
-} // VE AS POSICOES DISPONIVEIS PARA O NPC JOGAR
+} // Mesma logica do 'posicoesDisponiveisJogador' so que para o bot.
 
 
 function posicoesDisponiveisJogador(coluna) {
@@ -203,7 +203,8 @@ function posicoesDisponiveisJogador(coluna) {
         }
     }
     return posicoesDisponiveis;
-} // VE AS POSICOES DISPONIVEIS NA COLUNA QUE O JOGADOR CLICAR O BOTAO
+} /*VE AS POSICOES DISPONIVEIS NA COLUNA QUE O JOGADOR CLICAR O BOTAO seguinda:
+ Se tiver uma posicao vazia ele  preenche o vetor 'posicoesDisponiveis' com o indice da linhae e coluna  disponivel para jogo, ou seja uma celula vazia.*/
 
 function defineGanhador(){
     const pontuacaoJogador = somaPontucao('#pontuacaoJogador');
@@ -220,7 +221,7 @@ function defineGanhador(){
     } else {
         ganhador.textContent = 'Ganhador: NPC';
     }
-} // DEFINE O GANHADOR DO JOGO
+} // DEFINE O GANHADOR DO JOGO verificando qual a maior soma das 3 celulas de pontucao
 
 function placar() {
     const pontuacaoJogador = somaPontucao('#pontuacaoJogador');
@@ -229,7 +230,7 @@ function placar() {
     const placarNPC = document.querySelector('#placarNPC');
     placarJogador.textContent = `JOGADOR: ${pontuacaoJogador}`;
     placarNPC.textContent = `NPC: ${pontuacaoNPC}`;
-} // ATUALIZA O PLACAR EM TEMPO REAL
+} // ATUALIZA O PLACAR EM TEMPO REAL do lado do tabuleiro, verificando a soma nas celulas de pontuacao a cada jogada
 
 function descartarDados(valor, coluna, tipoGrid) {
     for (let i = 0; i < 3; i++) {
@@ -237,14 +238,14 @@ function descartarDados(valor, coluna, tipoGrid) {
             tipoGrid[i][coluna] = [];
         }
     }
-} // SERVE PARA ELIMINAR O DADO JOGADO CASO ELE JA EXISTA NA MESMO COLUNA
+} // SERVE PARA ELIMINAR O DADO JOGADO CASO ELE JA EXISTA NA MESMO COLUNA, assim 'zerando' o valor desse elemento na coluna selecionada 
 
 function colocarImagem(){
     dado.innerHTML = '';
     const imgLocal = document.createElement('img');
     imgLocal.src = `./assets/dado${dadoAtual}.svg`;
     dado.appendChild(imgLocal);
-} // COLOCA IMAGEM NO LUGAR DO NÚMERO DO DADO
+} // COLOCA IMAGEM NO LUGAR DO NÚMERO DO DADO , estilizando o tabuleiro 
 
 function somaPontucao(tipo){
     const celula = document.querySelectorAll(`${tipo} .celulaPontuacao`);
@@ -253,8 +254,8 @@ function somaPontucao(tipo){
         soma += parseInt(celula[i].textContent);
     }
     return soma;
-} // SOMA A PONTUACAO DA GRID DE PONTUACAO
+} // SOMA A PONTUACAO DA GRID DE PONTUACAO, convertendo o texto para numero nas celulas de pontuacao do tabuleiro  para numeros inteiros 
 
 function randomNumber() {
     return Math.floor(Math.random() * 6) + 1;
-} // GERA UM NÚMERO ALEATÓRIO
+} // GERA UM NÚMERO ALEATÓRIO de um a 1 a  6
